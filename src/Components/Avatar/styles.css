@@ -1,0 +1,18 @@
+.avatarCmpt {
+  height: 48px;
+  width: 48px;
+  font-size: 16px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ccc;
+  text-transform: uppercase;
+}
+
+.avatarCmpt .avatarImg {
+  height: 48px;
+  width: 48px;
+  object-fit: contain;
+  border-radius: 50%;
+}

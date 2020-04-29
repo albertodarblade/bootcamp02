@@ -1,0 +1,25 @@
+.sidebarCmpt {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 16px;
+  background-color: #333;
+  color: #fff;
+  width: 64px;
+  overflow-y: auto;
+} 
+
+.sidebarCmpt.expanded {
+  width: 420px;
+}
+
+.sidebarCmpt .toggle {
+  cursor: pointer;
+}
+
+@media (max-width: 320px) {
+ .sidebarCmpt {
+   background-color: red;
+  }
+}

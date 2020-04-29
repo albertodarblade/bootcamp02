@@ -1,0 +1,8 @@
+.userCmpt {
+  display: flex;
+  padding: 16px;
+}
+
+.userCmpt > * + * {
+  margin-left: 16px;
+}

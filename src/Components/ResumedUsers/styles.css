@@ -1,0 +1,20 @@
+.resumedUsersCpmt {
+  display: flex;
+  align-items: center;
+}
+
+.resumedUsersCpmt .avatarCmpt + .avatarCmpt {
+  margin-left: 8px;
+}
+
+.resumedUsersCpmt .counter {
+  margin-left: 16px;
+}
+
+.sidebarCmpt.expanded .resumedUsersCpmt {
+  flex-direction: row;
+}
+
+.sidebarCmpt .resumedUsersCpmt {
+  flex-direction: column;
+}

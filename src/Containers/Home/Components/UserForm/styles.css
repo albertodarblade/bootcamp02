@@ -1,0 +1,20 @@
+.userFormCmpt {
+  background-color: #fff;
+  padding:  24px 16px;
+  border-radius: 6px;
+}
+
+.userFormCmpt .actions {
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+
+.userFormCmpt .actions > * + * {
+  margin-left: 16px;
+}
+
+
+
