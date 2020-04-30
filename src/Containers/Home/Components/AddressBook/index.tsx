@@ -3,22 +3,17 @@ import IUser from 'Models/users';
 import User from 'Components/User';
 import Add from '@material-ui/icons/Add';
 import UserForm from '../UserForm';
+import withFilter from 'Hoc/withFilter';
 import './styles.css'
 
 function AddressBook({ users, onClickUser, postUser, error, showForm, changeStateForm} : IProps) {
   console.log(showForm)
-  // PROBLEM is not you, is meeee...
-
-  // ALL state properties should be in the store.
-  // WORK FROM HOME...
-  //const [showForm, setShowForm] = useState(false);
   function handleCancel() {
     changeStateForm(false);
   }
 
   function handleInvite(user: IUser) {
       postUser(user);
-    // works only in the happy path setShowForm(false);
   }
 
 
@@ -49,4 +44,8 @@ AddressBook.defaultProps = {
   onClickUser: () => {},
 }
 
-export default AddressBook;
+export default withFilter(AddressBook, {
+  keyCollection: 'users',
+  // ??? is working?
+  criteria: () => true
+});
