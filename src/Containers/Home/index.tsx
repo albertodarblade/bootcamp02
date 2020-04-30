@@ -12,10 +12,11 @@ import actions from "Stores/Home/actions";
   2cycle of life component
 */
 
-function Home({ users, getUsers, postUser, error }: IProps) {
+function Home({ users, getUsers, postUser, error, showForm, changeStateForm }: IProps) {
   useEffect(() => {
     getUsers();
   }, [getUsers]);
+
   const [currentUser, setUser] = useState();
   function handleClick(user: IUser) {
     setUser(user);
@@ -27,7 +28,7 @@ function Home({ users, getUsers, postUser, error }: IProps) {
         {currentUser && <UserDetails {...currentUser} />}
       </Dialog>
       <Sidebar>
-        <AddressBook error={error} postUser={postUser} users={users} onClickUser={handleClick} />
+        <AddressBook  showForm={showForm} changeStateForm={changeStateForm} error={error} postUser={postUser} users={users} onClickUser={handleClick} />
       </Sidebar>
     </section>
   );
@@ -38,6 +39,7 @@ function mapStateProps(state: any) {
   return {
     users: state.users,
     error: state.error,
+    showForm: state.view.showForm
   };
 }
 
@@ -48,6 +50,9 @@ function mapDispatchProps(dispatch: any) {
     },
     postUser: function (user: IUser) {
       return dispatch(actions.POST_USER(user))
+    },
+    changeStateForm: function (showForm: boolean){
+      dispatch(actions.UPDATE_VIEW({showForm}))
     }
   };
 }
@@ -56,7 +61,9 @@ interface IProps {
   users: IUser[],
   getUsers: any,
   postUser: (user: IUser) => void,
-  error: any
+  error: any,
+  showForm: boolean,
+  changeStateForm: (showForm: boolean) => void
 }
 
 export default connect(mapStateProps, mapDispatchProps)(Home);
