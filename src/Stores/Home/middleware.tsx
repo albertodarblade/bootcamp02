@@ -13,6 +13,7 @@ async function postUser(dispatch: Dispatch, user: IUser) {
   try {
     await API.postUser(user);
     dispatch(actions.ADD_USER(user));
+    dispatch(actions.UPDATE_VIEW({showForm: false}));
   } catch (error) {
     dispatch(actions.UPDATE_STATE({ error }));
   }

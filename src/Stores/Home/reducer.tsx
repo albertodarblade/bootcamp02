@@ -9,7 +9,8 @@ export const initialState = {
     email: ''
   },
   currentTask: {},
-  error: undefined
+  error: undefined,
+  view: { showForm: false }
 };
 
 function addUser(state: IState, user: IUser) {
@@ -31,6 +32,12 @@ function removeUser(state: IState, email: string) {
   return { ...state, users: newUsers };
 }
 
+function updateView(state: IState, payload: IView){
+   const newView = {...state.view, ...payload }
+   const newState = {...state, view: newView}
+   return newState;
+}
+
 
 export default function reducer(state: IState = initialState, action: IAction) {
   const { payload } = action;
@@ -40,10 +47,16 @@ export default function reducer(state: IState = initialState, action: IAction) {
     case actions.ADD_USER(payload).type:
       return addUser(state, payload);
     case actions.REMOVE_USER(payload).type:
-        return removeUser(state, payload);
+      return removeUser(state, payload);
+    case actions.UPDATE_VIEW(payload).type:
+      return updateView(state, payload);
     default:
       return state;
   }
+}
+
+interface IView {
+  showForm: boolean
 }
 
 interface IState {
@@ -53,5 +66,6 @@ interface IState {
   currentUser: IUser,
   //TODO:
   currentTask: any,
-  error: any
+  error: any,
+  view: IView
 }
