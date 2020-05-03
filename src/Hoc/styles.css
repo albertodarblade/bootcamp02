@@ -1,0 +1,13 @@
+.withFilter {
+}
+
+.withFilter .inputFilter {
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    text-align: center;
+    background-color:#ccc ;
+}
+
+
