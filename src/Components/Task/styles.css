@@ -1,0 +1,12 @@
+.taskCmpt {
+  margin: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  padding: 32px;
+  transition: all ease 0.3s;
+  cursor: pointer;
+}
+
+.taskCmpt:hover {
+  background: #f2f2f2;
+}

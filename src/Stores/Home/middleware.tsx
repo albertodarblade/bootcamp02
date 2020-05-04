@@ -28,6 +28,7 @@ export default function homeMiddleware({dispatch, getState} : any) {
       case actions.POST_USER().type:
         return postUser(dispatch, action.payload);
       default: 
+      //GET USERS.
         next(action);
     }
   }

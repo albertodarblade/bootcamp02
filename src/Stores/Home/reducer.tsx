@@ -2,13 +2,18 @@
 import actions from './actions';
 import IAction from 'Models/action';
 import IUser from 'Models/users';
+import ITask from 'Models/tasks';
+import fakeTasks from './fake';
+
 export const initialState = {
   users: [],
-  tasks: [],
+  tasks: fakeTasks,
   currentUser: {
     email: ''
   },
-  currentTask: {},
+  currentTask: {
+    id: ''
+  },
   error: undefined,
   view: { showForm: false }
 };
@@ -61,11 +66,9 @@ interface IView {
 
 interface IState {
   users: IUser[],
-  //TODO: 
-  tasks: any,
+  tasks: ITask[],
   currentUser: IUser,
-  //TODO:
-  currentTask: any,
+  currentTask: ITask,
   error: any,
   view: IView
 }

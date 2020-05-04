@@ -6,17 +6,21 @@ import IUser from "Models/users";
 import UserDetails from "Components/UserDetails";
 import Sidebar from "Components/Sidebar";
 import actions from "Stores/Home/actions";
+import TaskList from "./Components/TaskList";
+import './styles.css';
+import ITask from "Models/tasks";
 
 /* 
   1hacer dispatch de cualquier action
   2cycle of life component
 */
 
-function Home({ users, getUsers, postUser, error, showForm, changeStateForm }: IProps) {
+function Home({ users, tasks, getUsers, postUser, error, showForm, changeStateForm }: IProps) {
   useEffect(() => {
     getUsers();
   }, [getUsers]);
 
+  //TODO REMOVE THIS STATE SHOULD BE HANDLED IN THE STORE.
   const [currentUser, setUser] = useState();
   function handleClick(user: IUser) {
     setUser(user);
@@ -27,8 +31,17 @@ function Home({ users, getUsers, postUser, error, showForm, changeStateForm }: I
       <Dialog open={Boolean(currentUser)} onClose={() => setUser(undefined)}>
         {currentUser && <UserDetails {...currentUser} />}
       </Dialog>
+      <section className="taskSection">
+        <TaskList tasks={tasks} />
+      </section>
       <Sidebar>
-        <AddressBook  showForm={showForm} changeStateForm={changeStateForm} error={error} postUser={postUser} users={users} onClickUser={handleClick} />
+        <AddressBook 
+          showForm={showForm}
+          changeStateForm={changeStateForm}
+          error={error}
+          postUser={postUser}
+          users={users}
+          onClickUser={handleClick} />
       </Sidebar>
     </section>
   );
@@ -37,6 +50,7 @@ function Home({ users, getUsers, postUser, error, showForm, changeStateForm }: I
 //TODO: typo
 function mapStateProps(state: any) {
   return {
+    tasks: state.tasks,
     users: state.users,
     error: state.error,
     showForm: state.view.showForm
@@ -47,6 +61,9 @@ function mapDispatchProps(dispatch: any) {
   return {
     getUsers: function () {
       dispatch(actions.GET_USERS());
+    },
+    getTasks: function () {
+      dispatch(actions.GET_TASKS())
     },
     postUser: function (user: IUser) {
       return dispatch(actions.POST_USER(user))
@@ -59,6 +76,7 @@ function mapDispatchProps(dispatch: any) {
 
 interface IProps {
   users: IUser[],
+  tasks: ITask[],
   getUsers: any,
   postUser: (user: IUser) => void,
   error: any,

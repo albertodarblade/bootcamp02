@@ -1,0 +1,7 @@
+.homeContainer {
+  display: flex;
+}
+
+.homeContainer .taskSection {
+  width: 100%;
+}

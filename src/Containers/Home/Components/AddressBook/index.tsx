@@ -6,6 +6,8 @@ import UserForm from '../UserForm';
 import withFilter from 'Hoc/withFilter';
 import './styles.css'
 
+//receive readOnly property
+// readOnly should remove the add functionality of the adress book
 function AddressBook({ users, onClickUser, postUser, error, showForm, changeStateForm} : IProps) {
   function handleCancel() {
     changeStateForm(false);
