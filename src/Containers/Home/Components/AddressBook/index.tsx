@@ -7,7 +7,6 @@ import withFilter from 'Hoc/withFilter';
 import './styles.css'
 
 function AddressBook({ users, onClickUser, postUser, error, showForm, changeStateForm} : IProps) {
-  console.log(showForm)
   function handleCancel() {
     changeStateForm(false);
   }
@@ -44,8 +43,14 @@ AddressBook.defaultProps = {
   onClickUser: () => {},
 }
 
-export default withFilter(AddressBook, {
-  keyCollection: 'users',
-  // ??? is working?
-  criteria: () => true
-});
+const userFilterCriteria = ( value :string) => {
+  return (item:IUser)=>{
+      if(!item) {
+          return true;
+        }
+        return (item.name && item.name.includes(value)) || (item.email && item.email.includes(value)) };
+  };
+
+
+
+export default withFilter(AddressBook, {keyCollection: 'users', criteria: userFilterCriteria});

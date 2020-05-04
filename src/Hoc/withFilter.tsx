@@ -1,19 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import TextField from '@material-ui/core/TextField';
-
+import './styles.css'
 function withFilter(Component: any, options: IOptions) {
 
 
   function WrappedComponent(props: any) {
+    const [inputFilter, setInputFilter]= useState('');
     const collection = props[options.keyCollection];
-    const newCollection = collection.filter(options.criteria);
+    const newCollection = collection.filter(options.criteria(inputFilter));
     const newProps = { ...props };
 
     newProps[options.keyCollection] = newCollection;
 
     return (
       <section className="withFilter">
-        <TextField />
+        <TextField className="inputFilter"
+        value={inputFilter}
+          onChange={ event => setInputFilter(event.target.value)}
+        />
         <Component {...newProps} />
       </section>
     )
@@ -24,7 +28,7 @@ function withFilter(Component: any, options: IOptions) {
 
 interface IOptions {
   keyCollection: string,
-  criteria: (item: any, index: number) => boolean
+  criteria: (test:string) =>( ( item:any ) => any ) 
 }
 
 export default withFilter;
