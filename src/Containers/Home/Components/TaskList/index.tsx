@@ -3,11 +3,13 @@ import withFilter from 'Hoc/withFilter';
 import ITask from 'Models/tasks';
 import Task from 'Components/Task';
 import TaskForm from '../TaskForm';
+import IUser from 'Models/users';
 
-function TaskList({ tasks }: IProps) {
+function TaskList({ tasks, users }: IProps) {
   return (
     <section className="taskListCmpt">
-      <TaskForm />
+      <TaskForm users={users}/>
+
       {tasks.map(item => (
         <Task {...item} />
       ))}
@@ -17,6 +19,7 @@ function TaskList({ tasks }: IProps) {
 
 interface IProps {
   tasks: ITask[],
+  users:IUser[]
 }
 
 function filterCriteria(value: string) {

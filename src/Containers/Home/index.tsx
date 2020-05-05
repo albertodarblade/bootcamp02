@@ -32,7 +32,7 @@ function Home({ users, tasks, getUsers, postUser, error, showForm, changeStateFo
         {currentUser && <UserDetails {...currentUser} />}
       </Dialog>
       <section className="taskSection">
-        <TaskList tasks={tasks} />
+        <TaskList tasks={tasks} users={users} />
       </section>
       <Sidebar>
         <AddressBook 
