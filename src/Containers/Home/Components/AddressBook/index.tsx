@@ -8,7 +8,9 @@ import './styles.css'
 
 //receive readOnly property
 // readOnly should remove the add functionality of the adress book
-function AddressBook({ users, onClickUser, postUser, error, showForm, changeStateForm} : IProps) {
+function AddressBook({ users, onClickUser, postUser, error, showForm, changeStateForm, readOnly} : IProps) {
+
+  
   function handleCancel() {
     changeStateForm(false);
   }
@@ -20,11 +22,11 @@ function AddressBook({ users, onClickUser, postUser, error, showForm, changeStat
 
   return (
     <section className="addressBookCmpt">
-      <label className="title"> Adress Book <Add onClick={() => changeStateForm(!showForm)}/> </label>
+      {!readOnly && <label className="title"> Adress Book <Add onClick={() => changeStateForm(!showForm)}/> </label>}
       {console.log(showForm)}
       {showForm && <UserForm onInvite={handleInvite} onCancel={handleCancel}/>}
       {users.map(user => (
-        <div onClick={() => onClickUser(user)} key={user.email}>
+        <div onClick={() => {onClickUser(user);} } className='userCmpt' key={user.email}>
           <User {...user} />
         </div>
       ))}
@@ -38,7 +40,8 @@ interface IProps {
   postUser: (user:IUser) => void,
   error: any,
   showForm: boolean,
-  changeStateForm:(showForm: boolean) => void
+  changeStateForm:(showForm: boolean) => void,
+  readOnly:Boolean
 }
 
 AddressBook.defaultProps = {

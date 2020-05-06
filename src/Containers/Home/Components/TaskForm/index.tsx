@@ -22,7 +22,9 @@ function TaskForm({users}:IProps) {
   
   function handleClickUser(user:IUser) {
     const newOwners=form.owners;
-    newOwners.push(user);
+   
+   if( !Boolean(newOwners.find(element => element === user)))
+        newOwners.push(user);
     setForm({...form,owners:newOwners })
   }
 
@@ -67,7 +69,8 @@ function TaskForm({users}:IProps) {
           error={''}
           postUser={()=>{}}
           users={users}
-          onClickUser={handleClickUser} />
+          onClickUser={handleClickUser} 
+          readOnly={true}/>
       </Popover>
       <ResumedUsers users={form.owners} limit={3} />
     </Form>

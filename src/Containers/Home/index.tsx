@@ -41,7 +41,8 @@ function Home({ users, tasks, getUsers, postUser, error, showForm, changeStateFo
           error={error}
           postUser={postUser}
           users={users}
-          onClickUser={handleClick} />
+          onClickUser={handleClick} 
+          readOnly={false} />
       </Sidebar>
     </section>
   );
