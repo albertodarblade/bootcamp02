@@ -1,9 +1,15 @@
 import React, { useState } from 'react';
 import Form from 'Components/Form';
-import { TextField } from '@material-ui/core';
-
-function TaskForm() {
-  const [form, setForm] = useState({ title: '', description: '' });
+import { TextField, Button, Popover } from '@material-ui/core';
+import AddressBook from '../AddressBook';
+import IUser from 'Models/users';
+import ResumedUsers from 'Components/ResumedUsers';
+import './styles.css';
+function TaskForm({users}:IProps) {
+  const [form, setForm] = useState({ title: '', description: '', owners:[] as IUser[] });
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const id = open ? 'simple-popover' : undefined;
 
 
   function handleSave() {
@@ -12,6 +18,14 @@ function TaskForm() {
 
   function handleCancel() {
 
+  }
+  
+  function handleClickUser(user:IUser) {
+    const newOwners=form.owners;
+   
+   if( !Boolean(newOwners.find(element => element === user)))
+        newOwners.push(user);
+    setForm({...form,owners:newOwners })
   }
 
   const actions = [
@@ -27,20 +41,47 @@ function TaskForm() {
   }];
  
   return (
+    <section className="taskFormCmpt">
     <Form actions={actions} isValid={true}>
       <TextField
-        onChange={event => setForm({...form, title: form.title })}
+        onChange={event => setForm({...form, title: event.target.value })}
         placeholder="Write a title..."
         value={form.title}/>
-
+      
       <TextField
-        onChange={event => setForm({...form, description: form.description })}
+        onChange={event => setForm({...form, description: event.target.value })}
         placeholder="write a description..."
         value={form.description}/>
+      
+      <Button aria-describedby={id} color="primary" onClick={(event:any) => setAnchorEl(event.currentTarget)}>
+        Add members
+      </Button>
 
-      <div>How invite owners?</div>
+      <Popover
+        id={id}
+        open={Boolean(anchorEl)}
+        anchorEl={anchorEl}
+        onClose={() => setAnchorEl(null)}
+      >
+       <AddressBook 
+          showForm={false}
+          changeStateForm={()=>{}}
+          error={''}
+          postUser={()=>{}}
+          users={users}
+          onClickUser={handleClickUser} 
+          readOnly={true}/>
+      </Popover>
+      <ResumedUsers users={form.owners} limit={3} />
     </Form>
+    
+    </section>
   )
 }
+
+interface IProps{
+  users:IUser[]
+}
+
 
 export default TaskForm;

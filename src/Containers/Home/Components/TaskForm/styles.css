@@ -1,0 +1,18 @@
+.taskFormCmpt{
+    background-color: #fff;
+    padding:  24px 16px;
+    border-radius: 6px;
+}
+
+.taskFormCmpt .actions {
+    padding: 16px;
+    display: flex;
+    align-items: center;
+  }
+  
+  
+  .taskFormCmpt .actions > * + * {
+    margin-left: 16px;
+  }
+  
+  

@@ -47,7 +47,7 @@ function Home({ users, tasks, getUsers, postUser, error, showForm, changeStateFo
         <InlineInput placeholder="Search2..." readOnly onChange={handleSearch2}  value="Hola mundo test 2"/>
 
         <div>{search}</div>
-        <TaskList tasks={tasks} />
+        <TaskList tasks={tasks} users={users} />
       </section>
       <Sidebar>
         <AddressBook 
@@ -56,7 +56,8 @@ function Home({ users, tasks, getUsers, postUser, error, showForm, changeStateFo
           error={error}
           postUser={postUser}
           users={users}
-          onClickUser={handleClick} />
+          onClickUser={handleClick} 
+          readOnly={false} />
       </Sidebar>
     </section>
   );
