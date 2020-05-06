@@ -9,6 +9,7 @@ import actions from "Stores/Home/actions";
 import TaskList from "./Components/TaskList";
 import './styles.css';
 import ITask from "Models/tasks";
+import InlineInput from 'Components/InlineInput';
 
 /* 
   1hacer dispatch de cualquier action
@@ -22,8 +23,18 @@ function Home({ users, tasks, getUsers, postUser, error, showForm, changeStateFo
 
   //TODO REMOVE THIS STATE SHOULD BE HANDLED IN THE STORE.
   const [currentUser, setUser] = useState();
+  const [search, setSearch] = useState('');
   function handleClick(user: IUser) {
     setUser(user);
+  }
+
+  function handleSearch(searchValue: any) {
+    console.log(searchValue);
+    setSearch(searchValue);
+  }
+
+  function handleSearch2(value: any) {
+    console.log(value);
   }
 
   return (
@@ -32,6 +43,10 @@ function Home({ users, tasks, getUsers, postUser, error, showForm, changeStateFo
         {currentUser && <UserDetails {...currentUser} />}
       </Dialog>
       <section className="taskSection">
+        <InlineInput placeholder="Search..." onChange={handleSearch} />
+        <InlineInput placeholder="Search2..." readOnly onChange={handleSearch2}  value="Hola mundo test 2"/>
+
+        <div>{search}</div>
         <TaskList tasks={tasks} users={users} />
       </section>
       <Sidebar>
