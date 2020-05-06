@@ -10,7 +10,16 @@
   margin: 0 16px;
 }
 
-.addressBookCmpt .userCmpt:hover {
-    background-color: #999;
+.addressBookCmpt .user {
+  transition: all ease 0.3s;
+}
+
+.addressBookCmpt .user:hover {
+    background-color: #ebebeb;
     cursor: pointer;
 } 
+
+.addressBookCmpt .user.active {
+  filter: blur(1px);
+  background-color: #ccc;
+}

@@ -21,11 +21,17 @@ function TaskForm({users}:IProps) {
   }
   
   function handleClickUser(user:IUser) {
-    const newOwners=form.owners;
-   
-   if( !Boolean(newOwners.find(element => element === user)))
-        newOwners.push(user);
-    setForm({...form,owners:newOwners })
+    let newOwners = [...form.owners];
+    const index = newOwners.findIndex(element => element.email === user.email);
+
+
+   if(index >= 0) {
+     newOwners = newOwners.slice(0, index);
+   } else {
+    newOwners.push(user);
+   }
+   setForm({...form, owners: newOwners })
+
   }
 
   const actions = [
@@ -66,6 +72,7 @@ function TaskForm({users}:IProps) {
        <AddressBook 
           showForm={false}
           changeStateForm={()=>{}}
+          selectedUsers={form.owners.map(owner => owner.email)}
           error={''}
           postUser={()=>{}}
           users={users}
