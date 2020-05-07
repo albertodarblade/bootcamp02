@@ -24,7 +24,6 @@ function TaskForm({users}:IProps) {
     let newOwners = [...form.owners];
     const index = newOwners.findIndex(element => element.email === user.email);
 
-
    if(index >= 0) {
      newOwners = newOwners.slice(0, index);
    } else {
